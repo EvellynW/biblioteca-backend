@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 public class ClassRoom
@@ -13,11 +14,25 @@ public class ClassRoom
     [StringLength(50, ErrorMessage = "O turno não pode exceder 50 caracteres.")]
     public string Shift { get; set; } // Turno da turma
 
-    // Construtor
-    public ClassRoom(int id, string description, string shift)
+    public List<Student> Students { get; set; } // Lista de alunos que pertencem à turma
+
+    public List<TeacherClassRoom> TeacherClassRooms { get; set; } // Lista de junção para professores (muitos-para-muitos)
+
+
+
+    public ClassRoom()
     {
-        Id = id;
+        Students = new List<Student>(); // Inicializa a lista de alunos
+        TeacherClassRooms = new List<TeacherClassRoom>(); // Inicializa a lista de junção
+    }
+
+    // Construtor
+    public ClassRoom( string description, string shift)
+    {
+       
         Description = description;
         Shift = shift;
+        Students = new List<Student>(); // Inicializa a lista de alunos
+        TeacherClassRooms = new List<TeacherClassRoom>(); // Inicializa a lista de junção
     }
 }

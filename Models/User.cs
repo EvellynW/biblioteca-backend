@@ -26,13 +26,15 @@ public class User
     public bool IsActive { get; set; }
 
     [Required(ErrorMessage = "O papel é obrigatório.")]
-    public UserRole Role { get; set; } // Atributo para definir o papel do usuário
+    public EUserRole Role { get; set; } // Atributo para definir o papel do usuário
 
-   
 
-    public User(int id, string name, string cpf, string address, bool isActive, UserRole role, string? registrationNumber = null, string? phone = null)
+    public User()
     {
-        Id = id;
+
+    }
+    public User(string name, string cpf, string address, bool isActive, EUserRole role, string? registrationNumber = null, string? phone = null)
+    {
         Name = name;
         CPF = cpf;
         Address = address;

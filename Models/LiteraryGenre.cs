@@ -9,10 +9,19 @@ public class LiteraryGenre
     [StringLength(100, ErrorMessage = "O nome do gênero literário não pode exceder 100 caracteres.")]
     public string Name { get; set; }
 
+        // Relacionamento de um-para-muitos: um aluno pode ter vários aluguéis
+    public List<Book> Books { get; set; }
+
+
     // Construtor
-    public LiteraryGenre(int id, string name)
+
+    public LiteraryGenre()
     {
-        Id = id;
+        
+    }
+    public LiteraryGenre(string name)
+    {
+        
         Name = name;
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 public class Book
@@ -28,10 +29,17 @@ public class Book
     [Range(0, int.MaxValue, ErrorMessage = "A quantidade não pode ser negativa.")]
     public int Quantity { get; set; } = 1; // Novo atributo para quantidade
 
-    // Construtor
-    public Book(int id, string publisher, string title, List<string> authors, int publicationYear, string summary, int quantity, string? isbn = null)
+    public LiteraryGenre LiteraryGenre { get; set; }
+    public int LiteraryGenreId { get; set; } // Identificador único para o genero Literário
+
+    public List<Rental> Rentals { get; set; }
+    // Construtor sem parâmetros
+    public Book() { }
+
+    // Construtor com parâmetros
+    public Book(string publisher, LiteraryGenre genre, string title, List<string> authors, int publicationYear, string summary, int quantity, string? isbn = null)
     {
-        Id = id;
+        LiteraryGenre = genre;
         Publisher = publisher;
         Title = title;
         Authors = authors;

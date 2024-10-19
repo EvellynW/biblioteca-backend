@@ -6,10 +6,23 @@ public class Student : User
     [Required(ErrorMessage = "A turma é obrigatória.")]
     public ClassRoom ClassRoom { get; set; } // A turma em que o aluno está matriculado
 
+    // Relacionamento de um-para-muitos: um aluno pode ter vários aluguéis
+    public List<Rental> Rentals { get; set; }
+
+
+    public Student()
+    {
+
+    }
+
     // Construtor
-    public Student(int id, string name, string cpf, string address, bool isActive, UserRole role, ClassRoom classRoom, string? registrationNumber = null, string? phone = null)
-        : base(id, name, cpf, address, isActive, role, registrationNumber, phone)
+    public Student( string name, string cpf, string address, bool isActive, EUserRole role, ClassRoom classRoom, List<Rental> rentals, string? registrationNumber = null, string? phone = null)
+        : base(name, cpf, address, isActive, role, registrationNumber, phone)
     {
         ClassRoom = classRoom;
+        Rentals = rentals;
     }
+
+
+
 }
