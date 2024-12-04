@@ -64,11 +64,15 @@ public class UserController : ControllerBase
     }
 
     // POST: api/User
+
     [HttpPost]
     public async Task<ActionResult<UserDto>> PostUser(UserDto userDto)
     {
+
+
         if (!ModelState.IsValid)
         {
+            Console.WriteLine(ModelState);
             return BadRequest(ModelState);
         }
 

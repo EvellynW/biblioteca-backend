@@ -62,32 +62,32 @@ public class BookController : ControllerBase
         };
     }
 
-    // POST: api/book
-    [HttpPost]
-    public async Task<ActionResult<BookDto>> PostBook(BookDto bookDto)
+   [HttpPost]
+public async Task<ActionResult<BookDto>> PostBook(BookDto bookDto)
+{
+    if (!ModelState.IsValid)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        var book = new Book
-        {
-            Publisher = bookDto.Publisher,
-            Title = bookDto.Title,
-            ISBN = bookDto.ISBN,
-            Authors = bookDto.Authors,
-            PublicationYear = bookDto.PublicationYear,
-            Summary = bookDto.Summary,
-            Quantity = bookDto.Quantity,
-            LiteraryGenreId = (int)bookDto.literaryGenre.Id,
-        };
-
-        _context.Books.Add(book);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetBook), new { id = book.Id }, bookDto);
+        return BadRequest(ModelState);
     }
+
+    var book = new Book
+    {
+        Publisher = bookDto.Publisher,
+        Title = bookDto.Title,
+        ISBN = bookDto.ISBN,
+        Authors = bookDto.Authors,
+        PublicationYear = bookDto.PublicationYear,
+        Summary = bookDto.Summary,
+        Quantity = bookDto.Quantity,
+        LiteraryGenreId = bookDto.literaryGenre?.Id ?? 0, // Usando diretamente o Id do gênero
+    };
+
+    _context.Books.Add(book);
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction(nameof(GetBook), new { id = book.Id }, bookDto);
+}
+
 
     // PUT: api/book/{id}
     [HttpPut("{id}")]
